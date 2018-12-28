@@ -1,0 +1,4 @@
+
+Backup folder for MySQL Workbench 8.0 Database.  Exported via Server -> Export tool.  All tables, constraints, and test data.  
+Database developed from data requirements and populated with test data in September 2018.
+A couple minor alterations made based on subsequent meeting in December 2018.
