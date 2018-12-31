@@ -10,3 +10,5 @@ Open → Load → Resize → Activate → Current
 
 When you close a form, the following events occur in this order:
 Unload → Deactivate → Close
+
+https://docs.microsoft.com/en-us/office/vba/api/excel.workbook.windowresize
