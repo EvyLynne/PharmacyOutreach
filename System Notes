@@ -1,0 +1,5 @@
+2016 Excel opens two windows when opening file solution: 
+https://answers.microsoft.com/en-us/msoffice/forum/msoffice_excel-mso_win10-mso_o365b/2016-excel-opens-two-windows-when-opening-file/9db325e6-cb82-4236-b3a0-c1a8985d196d
+I recently installed MySQL on my laptop and that was the COM Add-in that triggered a secondary 'blank' spreadsheet.   
+As soon as I unchecked 'MySQL for Excel' under COM Add-ins, I only open the spreadsheet I desired.
+
