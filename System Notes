@@ -12,3 +12,60 @@ When you close a form, the following events occur in this order:
 Unload → Deactivate → Close
 
 https://docs.microsoft.com/en-us/office/vba/api/excel.workbook.windowresize
+
+Private Sub UserForm_Activate()
+  MakeFormResizable
+End Sub
+
+https://www.mrexcel.com/forum/excel-questions/485489-resize-userform.html
+
+'Written: August 02, 2010
+'Author:  Leith Ross
+'Summary: Makes the UserForm resizable by dragging one of the sides. Place a call
+'         to the macro MakeFormResizable in the UserForm's Activate event.
+
+ Private Declare Function SetLastError _
+   Lib "kernel32.dll" _
+     (ByVal dwErrCode As Long) _
+   As Long
+   
+ Public Declare Function GetActiveWindow _
+   Lib "user32.dll" () As Long
+
+ Private Declare Function GetWindowLong _
+   Lib "user32.dll" Alias "GetWindowLongA" _
+     (ByVal hWnd As Long, _
+      ByVal nIndex As Long) _
+   As Long
+               
+ Private Declare Function SetWindowLong _
+   Lib "user32.dll" Alias "SetWindowLongA" _
+     (ByVal hWnd As Long, _
+      ByVal nIndex As Long, _
+      ByVal dwNewLong As Long) _
+   As Long
+
+Public Sub MakeFormResizable()
+
+  Dim lStyle As Long
+  Dim hWnd As Long
+  Dim RetVal
+  
+  Const WS_THICKFRAME = &H40000
+  Const GWL_STYLE As Long = (-16)
+  
+    hWnd = GetActiveWindow
+  
+    'Get the basic window style
+     lStyle = GetWindowLong(hWnd, GWL_STYLE) Or WS_THICKFRAME
+     
+    'Set the basic window styles
+     RetVal = SetWindowLong(hWnd, GWL_STYLE, lStyle)
+    
+    'Clear any previous API error codes
+     SetLastError 0
+    
+    'Did the style change?
+     If RetVal = 0 Then MsgBox "Unable to make UserForm Resizable."
+     
+End Sub
