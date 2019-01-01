@@ -7,7 +7,9 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
-'
+' THIS DATABASE CLASS WAS USED IN A PROJECT FOR SECURE PROGRAMMING AND HAS THE NECESSARY CONNECTION STRINGS AND LOGIC
+' TO WORK WITH THIS PROJECT
+
 'The patient table patient_tbl has fields:
 '   idPatients int(10) AI PK
 '   Name varchar(45)
