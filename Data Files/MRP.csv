@@ -1,0 +1,27 @@
+I1 Medication without indication
+I2 Duplicate therapy
+I3 Indication without medication
+M1 Lab test indicated
+S1 Dose too high
+S2 ADR
+S3 Drug interaction
+S4 High risk medication
+S5 Unnecessary drug
+E1 Dose too low
+E2 Improper drug
+E3 Expired medication
+E4 Time of day
+A1 Failure to receive therapy
+A2 Overutilization
+A3 Administration challenges
+A4 Cost
+A5 Med organization
+A6 Dose not understand instructions
+A7 Prefers not to take
+D1 Self screening of BP
+D2 Self screening of diabetes
+D3 Lifestyle modifications
+D4 Patient care referrals
+D5 Routine tests
+D6 Disease state education
+D7 self-care recommendation
