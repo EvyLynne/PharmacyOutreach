@@ -1,0 +1,44 @@
+root@localhost:3306
+connection name Local instance MySQL80
+username root
+
+ Dim conn As ADODB.connection
+    
+    Dim Server_Name As String
+    Dim Database_Name As String
+    Dim Server_Password As String
+    
+    Server_Name = "localhost"
+    Database_Name = ""
+    Server_Password = "Pookaloo400"
+    Dim Connection_String As String
+    
+    Dim sql As String
+    sql = ""
+
+    Dim day As String
+    day = ""
+    Dim Initial_Password As String
+
+   Connection_String = "Driver={MySQL ODBC 5.3 ANSI Driver};"
+    Connection_String = Connection_String & "Server=" & Server_Name & ";"
+    Connection_String = Connection_String & " DATABASE=" & Database_Name & ";"
+    Connection_String = Connection_String & "UID=root;PWD=" & Server_Password & "; OPTION=3"
+
+  Set conn = New ADODB.connection
+    conn.ConnectionString = Connection_String
+    conn.Open
+    
+    Set rs = New ADODB.Recordset
+    rs.CursorLocation = adUseServer
+    rs.Open sql, conn
+Do Until rs.EOF
+        For Each fld In rs.Fields
+   Loop
+    rs.Close
+    conn.Close
+    If output_string <> "" Then
+        MsgBox output_string
+        read_user = output_string
+    End If
+
