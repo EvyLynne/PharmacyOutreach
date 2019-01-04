@@ -1,0 +1,27 @@
+On Error GoTo ErrorHandler
+' TODO: active code here
+Exit Sub
+ErrorHandler:
+Select Case Err.Number
+    Case 13
+        msgbox "Passed the wrong data type as a paramater"
+    Case 75
+        msgbox "Problem with file -- 1. Could path be spelled wrong? 2. Could filename be spelled wrong or missing? 3. Could path be missing?"
+
+End Select
+
+Resume Proceed:
+
+Proceed:
+
+
+errors to handle:
+
+writeCSV
+type mismatch: array or user-defined type expected -- provided string isntead of array of strings
+run-time error 75: path/file access error -- file path string empty / filename missing
+
+argument not optional
+
+readCSV_into_comboBox
+run-time error 75: path/file access error -- file path string empty / filename incorrect or missing
