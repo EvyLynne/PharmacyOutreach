@@ -1,0 +1,3 @@
+Enter Data | Server = localhost ---> no port #
+Login with Database credentials not Windows credentials
+Use alternate credentials | username & password 

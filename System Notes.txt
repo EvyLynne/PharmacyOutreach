@@ -1,0 +1,71 @@
+2016 Excel opens two windows when opening file solution: 
+https://answers.microsoft.com/en-us/msoffice/forum/msoffice_excel-mso_win10-mso_o365b/2016-excel-opens-two-windows-when-opening-file/9db325e6-cb82-4236-b3a0-c1a8985d196d
+I recently installed MySQL on my laptop and that was the COM Add-in that triggered a secondary 'blank' spreadsheet.   
+As soon as I unchecked 'MySQL for Excel' under COM Add-ins, I only open the spreadsheet I desired.
+
+
+https://docs.microsoft.com/en-us/office/vba/api/access.form
+When you first open a form, the following events occur in this order:
+Open → Load → Resize → Activate → Current
+
+When you close a form, the following events occur in this order:
+Unload → Deactivate → Close
+
+https://docs.microsoft.com/en-us/office/vba/api/excel.workbook.windowresize
+
+Private Sub UserForm_Activate()
+  MakeFormResizable
+End Sub
+
+https://www.mrexcel.com/forum/excel-questions/485489-resize-userform.html
+
+'Written: August 02, 2010
+'Author:  Leith Ross
+'Summary: Makes the UserForm resizable by dragging one of the sides. Place a call
+'         to the macro MakeFormResizable in the UserForm's Activate event.
+
+ Private Declare Function SetLastError _
+   Lib "kernel32.dll" _
+     (ByVal dwErrCode As Long) _
+   As Long
+   
+ Public Declare Function GetActiveWindow _
+   Lib "user32.dll" () As Long
+
+ Private Declare Function GetWindowLong _
+   Lib "user32.dll" Alias "GetWindowLongA" _
+     (ByVal hWnd As Long, _
+      ByVal nIndex As Long) _
+   As Long
+               
+ Private Declare Function SetWindowLong _
+   Lib "user32.dll" Alias "SetWindowLongA" _
+     (ByVal hWnd As Long, _
+      ByVal nIndex As Long, _
+      ByVal dwNewLong As Long) _
+   As Long
+
+Public Sub MakeFormResizable()
+
+  Dim lStyle As Long
+  Dim hWnd As Long
+  Dim RetVal
+  
+  Const WS_THICKFRAME = &H40000
+  Const GWL_STYLE As Long = (-16)
+  
+    hWnd = GetActiveWindow
+  
+    'Get the basic window style
+     lStyle = GetWindowLong(hWnd, GWL_STYLE) Or WS_THICKFRAME
+     
+    'Set the basic window styles
+     RetVal = SetWindowLong(hWnd, GWL_STYLE, lStyle)
+    
+    'Clear any previous API error codes
+     SetLastError 0
+    
+    'Did the style change?
+     If RetVal = 0 Then MsgBox "Unable to make UserForm Resizable."
+     
+End Sub
