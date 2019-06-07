@@ -1,0 +1,10 @@
+Necesary files / folders:
+Pharm-Outreach-FrontEnd.xlsm - file 
+"Drop Down List Files" - folder
+
+Run the Excel solution:
+Click the Developer Tab
+Click Visual Basic
+The frmWelcome is the entry point to the program - view the object then run it
+When the application opens, it needs the path for the drop down files, 
+copy and paste the path for "Drop Down List Files" into the dialog box
