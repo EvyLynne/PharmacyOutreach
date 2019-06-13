@@ -1,4 +1,3 @@
-
 Table Health {
   Patient_ID int [primary key]
   Session_date date [primary key]
@@ -18,7 +17,6 @@ Table Health {
   Height_ft float(4,2)
   BMI float(3,1)
 }
-
 Table Insurance {
   Plan_Name varchar(255) [primary key]
   Cardholder_ID varchar(255) [primary key]
@@ -28,7 +26,6 @@ Table Insurance {
   Group_number varchar(255) 
   indexes Patient_ID
 }
-
 Table Patients {
   Patient_ID int [primary key]
   Name varchar(255)
@@ -47,7 +44,6 @@ Table Patients {
   Anticoagulation boolean
   Other text
 }
-
 Table Prescriber {
   Prescriber_ID int [primary key]
   p_Date date [primary key]
@@ -55,7 +51,17 @@ Table Prescriber {
   Name varchar(255) 
   Phone_Number varchar(255)
 }
-
+Table Immunization {
+  Patient_ID int [primary key]
+  Immunization_date date [primary key]
+  Vaccine varchar(255) [primary key]
+  Needs_Flu boolean
+  Needs_Pneumonia boolean
+  Needs_Shingles boolean
+  Needs_HepatitusB boolean
+  Needs_Update_Records boolean
+  Comments text
+}
 Table Session {
   Session_ID int [primary key]
   Patient_ID int
@@ -82,19 +88,6 @@ Table Session {
   FollowUp_Recommendation varchar(255)
   indexes Patient_ID
 }
-
-Table Immunization {
-  Patient_ID int [primary key]
-  Immunization_date date [primary key]
-  Vaccine varchar(255) [primary key]
-  Needs_Flu boolean
-  Needs_Pneumonia boolean
-  Needs_Shingles boolean
-  Needs_HepatitusB boolean
-  Needs_Update_Records boolean
-  Comments text
-}
-
 Table Questions {
   Questions_ID int [primary key]
   Session_ID int [primary key]
@@ -110,7 +103,6 @@ Table Questions {
   Answer_4 varchar(255)
   Answer_5 varchar(255)
 }
-
 Table Diabetes_Education_And_Support_Session {
   Patient_ID int [primary key]
   Session_Date date [primary key]
@@ -145,7 +137,6 @@ Table Diabetes_Education_And_Support_Session {
   Nutrition__Recommendations varchar(255)
   Nutrition__Intervention varchar(255)    
 }
-
 Table Medication_Review_Session{
   Patient_ID int [primary key]
   Drug_ID int [primary key]
@@ -158,7 +149,6 @@ Table Medication_Review_Session{
   Administration_Technique boolean 
   Formulary_Friendly boolean 
 }
-
 Table Drug {
   Drug_Id int [primary key]
   Category varchar(255)
@@ -168,7 +158,6 @@ Table Drug {
   Strength varchar(255)
   Unit varchar(255)
 }
-
 Table Medication_Related_Problem {
   Patient_ID int [primary key]
   Medication_Related_Problem_Code varchar(255) [primary key]
@@ -176,12 +165,10 @@ Table Medication_Related_Problem {
   Medication_Related_Problem_Category varchar(255)
   indexes Medication_Related_Problem_Category 
 }
-
 Table Medication_Related_Problem_Categories {
   Medication_Related_Problem_Category varchar(255) [primary key]
   Category varchar(255)
   Action_Plan text 
 }
-
-
-//Ref: Patients.admin_id > users.id
+Ref: Medication_Related_Problem.Drug_ID > Drug.Drug_Id
+Ref: Medication_Related_Problem.Drug_ID > Medication_Review_Session.Drug_ID
