@@ -182,14 +182,12 @@ CREATE TABLE `Medication_Related_Problem`
 (
   `Patient_ID` int PRIMARY KEY,
   `Medication_Related_Problem_Code` varchar(255) PRIMARY KEY,
-  `Drug_ID` int PRIMARY KEY,
-  `Medication_Related_Problem_Category` varchar(255),
-  `indexes` Medication_Related_Problem_Category
+  `Drug_ID` int PRIMARY KEY
 );
 
 CREATE TABLE `Medication_Related_Problem_Categories`
 (
-  `Medication_Related_Problem_Category` varchar(255) PRIMARY KEY,
+  `Medication_Related_Problem_Code` varchar(255) PRIMARY KEY,
   `Category` varchar(255),
   `Action_Plan` text
 );
