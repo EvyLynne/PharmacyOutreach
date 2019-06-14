@@ -110,6 +110,12 @@ CREATE TABLE `Questions`
   `Question_3` varchar(255),
   `Question_4` varchar(255),
   `Question_5` varchar(255),
+  `Answer_ID` int
+);
+
+CREATE TABLE `Answers`
+(
+  `Answer_ID` int PRIMARY KEY,
   `Answer_1` varchar(255),
   `Answer_2` varchar(255),
   `Answer_3` varchar(255),
