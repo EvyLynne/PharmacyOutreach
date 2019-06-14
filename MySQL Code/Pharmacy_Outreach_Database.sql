@@ -100,10 +100,26 @@ CREATE TABLE `Session`
   `indexes` Patient_ID
 );
 
-CREATE TABLE `Questions`
+CREATE TABLE `SessionQuestionsAndAnswers`
 (
   `Questions_ID` int PRIMARY KEY,
   `Session_ID` int PRIMARY KEY,
+  `Questions_Date` date PRIMARY KEY,
+  `Question_1` varchar(255),
+  `Question_2` varchar(255),
+  `Question_3` varchar(255),
+  `Question_4` varchar(255),
+  `Question_5` varchar(255),
+  `Answer_1` varchar(255),
+  `Answer_2` varchar(255),
+  `Answer_3` varchar(255),
+  `Answer_4` varchar(255),
+  `Answer_5` varchar(255)
+);
+
+CREATE TABLE `Questions`
+(
+  `Questions_ID` int PRIMARY KEY,
   `Questions_Date` date PRIMARY KEY,
   `Question_1` varchar(255),
   `Question_2` varchar(255),
