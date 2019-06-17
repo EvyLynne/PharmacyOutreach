@@ -3,6 +3,8 @@ https://support.microsoft.com/en-us/help/858611/error-compile-error-user-defined
 VBA editor and go to Tools | References. 
 Most recent edition of  Microsoft Active X Data Object Library must be activated
 
+https://dev.mysql.com/downloads/connector/odbc/5.3.html
+
 
 root@localhost:3306
 connection name Local instance MySQL80
