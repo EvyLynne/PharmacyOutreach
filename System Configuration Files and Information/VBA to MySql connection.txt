@@ -1,3 +1,9 @@
+IMPORTANT VBA CONFIGURATION: 
+https://support.microsoft.com/en-us/help/858611/error-compile-error-user-defined-type-not-defined-attempting-to-compil
+VBA editor and go to Tools | References. 
+Most recent edition of  Microsoft Active X Data Object Library must be activated
+
+
 root@localhost:3306
 connection name Local instance MySQL80
 username root
