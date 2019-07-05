@@ -88,7 +88,7 @@ Table Session {
   FollowUp_Recommendation varchar(255)
   indexes Patient_ID
 }
-Table Questions {
+Table SessionQuestionsAndAnswers {
   Questions_ID int [primary key]
   Session_ID int [primary key]
   Questions_Date date [primary key]
@@ -102,6 +102,25 @@ Table Questions {
   Answer_3 varchar(255)
   Answer_4 varchar(255)
   Answer_5 varchar(255)
+
+}
+Table Questions{
+  Questions_ID int [primary key]
+  Questions_Date date [primary key]
+  Question_1 varchar(255)
+  Question_2 varchar(255)
+  Question_3 varchar(255)
+  Question_4 varchar(255)
+  Question_5 varchar(255)
+  Answer_ID int 
+}
+Table Answers {
+  Answer_ID int [primary key]
+  Answer_1 varchar(255)
+  Answer_2 varchar(255)
+  Answer_3 varchar(255)
+  Answer_4 varchar(255)
+  Answer_5 varchar(255)
 }
 Table Diabetes_Education_And_Support_Session {
   Patient_ID int [primary key]
@@ -110,10 +129,7 @@ Table Diabetes_Education_And_Support_Session {
   Initial_Level_Of_Confidence_Weight_Control varchar(255)
   Initial_Level_Of_Confidence_Medication varchar(255)
   Initial_Level_Of_Confidence_Exercise varchar(255)
-  Post_Session_Level_Of_Confidence_Blood_Sugar varchar(255)
-  Post_Session_Level_Of_Confidence_Weight_Control varchar(255)
-  Post_Session_Level_Of_Confidence_Medication varchar(255)
-  Post_Session_Level_Of_Confidence_Exercise varchar(255)
+  Post_Session_Level_Of_Confidence varchar(255)
   Frequency_Of_Dental_Care varchar(255)
   Frequency_Of_Foot_Care varchar(255)
   Frequency_Of_Eye_Care varchar(255)
@@ -162,13 +178,21 @@ Table Medication_Related_Problem {
   Patient_ID int [primary key]
   Medication_Related_Problem_Code varchar(255) [primary key]
   Drug_ID int [primary key]
-  Medication_Related_Problem_Category varchar(255)
-  indexes Medication_Related_Problem_Category 
 }
 Table Medication_Related_Problem_Categories {
-  Medication_Related_Problem_Category varchar(255) [primary key]
+  Medication_Related_Problem_Code varchar(255) [primary key]
   Category varchar(255)
   Action_Plan text 
 }
-Ref: Medication_Related_Problem.Drug_ID > Drug.Drug_Id
+Ref: Prescriber.Patient_ID > Patients.Patient_ID 
+Ref: Immunization.Patient_ID > Patients.Patient_ID
+Ref: Insurance.Patient_ID > Patients.Patient_ID
+Ref: Health.Patient_ID > Patients.Patient_ID
+Ref: Session.Patient_ID > Patients.Patient_ID
+Ref: SessionQuestionsAndAnswers.Session_ID > Session.Session_ID
+Ref: Diabetes_Education_And_Support_Session.Patient_ID > Patients.Patient_ID
+Ref: Medication_Review_Session.Patient_ID > Patients.Patient_ID
+Ref: Medication_Review_Session.Drug_ID > Drug.Drug_Id
 Ref: Medication_Related_Problem.Drug_ID > Medication_Review_Session.Drug_ID
+Ref: Medication_Related_Problem_Categories.Medication_Related_Problem_Code > Medication_Related_Problem.Medication_Related_Problem_Code
+Ref: Answers.Answer_ID > Questions.Answer_ID

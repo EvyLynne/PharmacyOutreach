@@ -71,7 +71,7 @@ CREATE TABLE `Immunization`
   `Comments` text
 );
 CREATE INDEX CompositeImmunization ON Immunization(Patient_ID, Immunization_date, Vaccine);
-CREATE TABLE `Session`
+CREATE TABLE `Sessions`
 (
   `Session_ID` int PRIMARY KEY,
   `Patient_ID` int,

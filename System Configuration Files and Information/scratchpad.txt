@@ -1,0 +1,37 @@
+Schema = "mydb"
+sql = "SELECT * FROM mydb.patients_tbl"
+
+'Open connection
+
+Set conn = New ADODB.connection
+conn.ConnectionString = Connection_String
+conn.Open
+
+Set rs = New ADODB.Recordset
+rs.CursorLocation = adUseServer
+rs.Open sql, conn
+
+    Do Until rs.EOF
+        For Each fld In rs.Fields
+            MsgBox fld.value
+        Next
+        rs.MoveNext
+    
+    Loop
+
+    rs.Close
+conn.Close
+
+
+End Sub
+
+sql = "SELECT * FROM mydb.patients_tbl"
+
+'Open connection
+
+Set conn = New ADODB.connection
+conn.ConnectionString = Connection_String
+conn.Open
+conn.Close
+
+End Sub
