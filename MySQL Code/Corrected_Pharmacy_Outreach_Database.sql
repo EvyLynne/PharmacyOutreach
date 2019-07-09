@@ -98,7 +98,7 @@ CREATE TABLE `Sessions`
   `FollowUp_Recommendation` varchar(255)
 
 );
-CREATE INDEX PatientID ON Session(Patient_ID);
+CREATE INDEX PatientID ON Sessions(Patient_ID);
 CREATE TABLE `Session_Questions_And_Answers`
 (
   `Questions_ID` int PRIMARY KEY,
@@ -199,7 +199,7 @@ CREATE TABLE `Medication_Related_Problem`
 (
   `Patient_ID` int PRIMARY KEY,
   `Medication_Related_Problem_Code` varchar(255) ,
-  `Drug_ID` int 
+  `Drug_ID` int
 );
 CREATE INDEX CompositeMRP ON Medication_Related_Problem(Patient_ID, Medication_Related_Problem_Code, Drug_ID );
 CREATE INDEX MRP_Index on Medication_Related_Problem (Medication_Related_Problem_Code);
@@ -217,9 +217,9 @@ ALTER TABLE `Insurance` ADD FOREIGN KEY (`Patient_ID`) REFERENCES `Patients` (`P
 
 ALTER TABLE `Health` ADD FOREIGN KEY (`Patient_ID`) REFERENCES `Patients` (`Patient_ID`);
 
-ALTER TABLE `Session` ADD FOREIGN KEY (`Patient_ID`) REFERENCES `Patients` (`Patient_ID`);
+ALTER TABLE `Sessions` ADD FOREIGN KEY (`Patient_ID`) REFERENCES `Patients` (`Patient_ID`);
 
-ALTER TABLE `Session_Questions_And_Answers` ADD FOREIGN KEY (`Session_ID`) REFERENCES `Session` (`Session_ID`);
+ALTER TABLE `Session_Questions_And_Answers` ADD FOREIGN KEY (`Session_ID`) REFERENCES `Sessions` (`Session_ID`);
 
 ALTER TABLE `Diabetes_Education_And_Support_Session` ADD FOREIGN KEY (`Patient_ID`) REFERENCES `Patients` (`Patient_ID`);
 
