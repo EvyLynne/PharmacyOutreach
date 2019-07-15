@@ -18,7 +18,6 @@ CREATE TABLE `Health`
   `Height_ft` float(4,2),
   `BMI` float(3,1)
 );
-CREATE INDEX CompositeHealth ON Health(Patient_ID, Session_date);
 CREATE TABLE `Insurance`
 (
   `Plan_Name` varchar(255),
@@ -29,10 +28,9 @@ CREATE TABLE `Insurance`
   `Group_number` varchar(255)
 
 );
-CREATE INDEX CompositeInsurance ON Insurance(Plan_Name, Cardholder_ID, Patient_ID);
 CREATE TABLE `Patients`
 (
-  `Patient_ID` int NOT NULL AUTO_INCREMENT,
+  `Patient_ID` int PRIMARY KEY,
   `Name` varchar(255),
   `DOB` date,
   `Gender` varchar(255),
@@ -47,19 +45,16 @@ CREATE TABLE `Patients`
   `End_Stage_Renal_Disease` boolean,
   `Cardiovascular_Disorders` boolean,
   `Anticoagulation` boolean,
-  `Other` text,
-  PRIMARY KEY (`Patient_ID`)
+  `Other` text
 );
 CREATE TABLE `Prescriber`
 (
-  `Prescriber_ID` int NOT NULL AUTO_INCREMENT,
+  `Prescriber_ID` int PRIMARY KEY,
   `p_Date` date,
   `Patient_ID` int,
   `Name` varchar(255),
-  `Phone_Number` varchar(255),
-  PRIMARY KEY (`Prescriber_ID`)
+  `Phone_Number` varchar(255)
 );
-CREATE INDEX CompositePrescriber ON Prescriber(Prescriber_ID, p_Date, Patient_ID);
 CREATE TABLE `Immunization`
 (
   `Patient_ID` int PRIMARY KEY,
@@ -72,10 +67,9 @@ CREATE TABLE `Immunization`
   `Needs_Update_Records` boolean,
   `Comments` text
 );
-CREATE INDEX CompositeImmunization ON Immunization(Patient_ID, Immunization_date, Vaccine);
 CREATE TABLE `Sessions`
 (
-  `Session_ID` int NOT NULL AUTO_INCREMENT,
+  `Session_ID` int PRIMARY KEY,
   `Patient_ID` int,
   `Facility` varchar(255),
   `Session_Date` date,
@@ -97,11 +91,9 @@ CREATE TABLE `Sessions`
   `Medication_History` boolean,
   `Labratories_History` boolean,
   `Alternative_Language_Translations` boolean,
-  `FollowUp_Recommendation` varchar(255),
-  PRIMARY KEY (`Session_ID`)
+  `FollowUp_Recommendation` varchar(255)
 
 );
-CREATE INDEX PatientID ON Sessions(Patient_ID);
 CREATE TABLE `Session_Questions_And_Answers`
 (
   `Questions_ID` int PRIMARY KEY,
@@ -118,10 +110,9 @@ CREATE TABLE `Session_Questions_And_Answers`
   `Answer_4` varchar(255),
   `Answer_5` varchar(255)
 );
-CREATE INDEX CompositeQA ON Session_Questions_And_Answers(Questions_ID, Session_ID, Questions_Date);
 CREATE TABLE `Questions`
 (
-  `Questions_ID` int ,
+  `Questions_ID` int PRIMARY KEY,
   `Questions_Date` date,
   `Question_1` varchar(255),
   `Question_2` varchar(255),
@@ -129,19 +120,15 @@ CREATE TABLE `Questions`
   `Question_4` varchar(255),
   `Question_5` varchar(255),
   `Answer_ID` int
-
 );
-CREATE INDEX CompositeQuestions ON Questions(Questions_ID, Questions_Date );
-CREATE INDEX FK_Answers on Questions(Answer_ID);
 CREATE TABLE `Answers`
 (
-  `Answer_ID` int NOT NULL AUTO_INCREMENT,
+  `Answer_ID` int PRIMARY KEY,
   `Answer_1` varchar(255),
   `Answer_2` varchar(255),
   `Answer_3` varchar(255),
   `Answer_4` varchar(255),
-  `Answer_5` varchar(255),
-  PRIMARY KEY (`Answer_ID`)
+  `Answer_5` varchar(255)
 );
 CREATE TABLE `Diabetes_Education_And_Support_Session`
 (
@@ -175,7 +162,6 @@ CREATE TABLE `Diabetes_Education_And_Support_Session`
   `Nutrition__Recommendations` varchar(255),
   `Nutrition__Intervention` varchar(255)
 );
-CREATE INDEX CompositeDESS ON Diabetes_Education_And_Support_Session(Patient_ID, Session_Date );
 CREATE TABLE `Medication_Review_Session`
 (
   `Patient_ID` int PRIMARY KEY,
@@ -189,52 +175,25 @@ CREATE TABLE `Medication_Review_Session`
   `Administration_Technique` boolean,
   `Formulary_Friendly` boolean
 );
-CREATE INDEX CompositeMedReview ON Medication_Review_Session(Patient_ID, Drug_ID, Session_Date );
 CREATE TABLE `Drug`
 (
-  `Drug_Id` int NOT NULL AUTO_INCREMENT,
+  `Drug_Id` int PRIMARY KEY,
   `Category` varchar(255),
   `Name` varchar(255),
   `Part_D_1` varchar(255),
   `Part_D_2` varchar(255),
   `Strength` varchar(255),
-  `Unit` varchar(255),
-  PRIMARY KEY (`Drug_Id`)
+  `Unit` varchar(255)
 );
 CREATE TABLE `Medication_Related_Problem`
 (
   `Patient_ID` int PRIMARY KEY,
   `Medication_Related_Problem_Code` varchar(255) ,
-  `Drug_ID` int
+  `Drug_ID` int 
 );
-CREATE INDEX CompositeMRP ON Medication_Related_Problem(Patient_ID, Medication_Related_Problem_Code, Drug_ID );
-CREATE INDEX MRP_Index on Medication_Related_Problem (Medication_Related_Problem_Code);
 CREATE TABLE `Medication_Related_Problem_Categories`
 (
   `Medication_Related_Problem_Code` varchar(255) PRIMARY KEY,
   `Category` varchar(255),
   `Action_Plan` text
 );
-ALTER TABLE `Prescriber` ADD FOREIGN KEY (`Patient_ID`) REFERENCES `Patients` (`Patient_ID`);
-
-ALTER TABLE `Immunization` ADD FOREIGN KEY (`Patient_ID`) REFERENCES `Patients` (`Patient_ID`);
-
-ALTER TABLE `Insurance` ADD FOREIGN KEY (`Patient_ID`) REFERENCES `Patients` (`Patient_ID`);
-
-ALTER TABLE `Health` ADD FOREIGN KEY (`Patient_ID`) REFERENCES `Patients` (`Patient_ID`);
-
-ALTER TABLE `Sessions` ADD FOREIGN KEY (`Patient_ID`) REFERENCES `Patients` (`Patient_ID`);
-
-ALTER TABLE `Session_Questions_And_Answers` ADD FOREIGN KEY (`Session_ID`) REFERENCES `Sessions` (`Session_ID`);
-
-ALTER TABLE `Diabetes_Education_And_Support_Session` ADD FOREIGN KEY (`Patient_ID`) REFERENCES `Patients` (`Patient_ID`);
-
-ALTER TABLE `Medication_Review_Session` ADD FOREIGN KEY (`Patient_ID`) REFERENCES `Patients` (`Patient_ID`);
-
-ALTER TABLE `Medication_Review_Session` ADD FOREIGN KEY (`Drug_ID`) REFERENCES `Drug` (`Drug_Id`);
-
-ALTER TABLE `Medication_Related_Problem` ADD FOREIGN KEY (`Drug_ID`) REFERENCES `Medication_Review_Session` (`Drug_ID`);
-
-ALTER TABLE `Medication_Related_Problem_Categories` ADD FOREIGN KEY (`Medication_Related_Problem_Code`) REFERENCES `Medication_Related_Problem` (`Medication_Related_Problem_Code`);
-
-ALTER TABLE `Answers` ADD FOREIGN KEY (`Answer_ID`) REFERENCES `Questions` (`Answer_ID`);
